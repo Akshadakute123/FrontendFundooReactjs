@@ -1,0 +1,62 @@
+.title
+{
+    /* border:2px solid brown; */
+    padding: 16px;
+    /* color: gray; */
+    margin-left: 500px;
+    margin-right: 500px;
+    margin-top: 30px;
+    height: 400px;
+    border-radius: 10px;
+    border-spacing: 33px;
+    background:whitesmoke
+
+
+}
+.border
+{
+    border-width: 33px;
+    color:black;
+    background-origin: border-box;
+   
+    
+
+}
+
+.login
+{
+    color:rgb(19, 19, 117);
+    font-style: normal;
+}
+.username
+{
+    margin-left: 450;
+    padding: 10px;
+    margin-top: 1px;
+}
+#button
+{
+    columns: width 0px;
+    /* column-rule-width: 30px; */
+    /* align-content: center; */
+    margin-left: 10px;
+ /* margin-top: 40px; */
+    margin-right: 0px;
+    flex: 1;
+    display :flex;
+
+}
+#button1
+{
+    columns: width 20px;
+    column-rule-width: 30px;
+    padding-right: 20px;
+    /* scroll-padding-left: 70px ; */
+    align-content: center;
+    margin-left: 70px;
+    margin-top: 40px;
+    margin-right: 0px;
+    flex:2;
+    display: flex;
+
+}

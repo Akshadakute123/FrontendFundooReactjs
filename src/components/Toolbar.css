@@ -1,0 +1,95 @@
+.toolbar
+{
+    position:fixed;
+    top: 0px;
+    left: 0px;
+   
+    background:whitesmoke;
+    width: 100%;
+    height: 56px;
+    display: flex;
+}
+.toolbar_nav
+{
+    display: flex;
+ align-items:center ;
+ height: 100%;
+ padding: 0px;
+ 
+ 
+ 
+}
+.toolbar_logo
+{
+    margin-left: 0rem;
+ 
+    
+}
+.toolbar_logo a{
+   
+    text-decoration:none;
+    color:black;
+    font-size: 1.5rem;
+    
+   
+}
+.toolbar_nav-item a
+{
+
+    text-decoration:none;
+    color:white;
+
+}
+
+
+.toolbar_nav-item a:hover,
+.toolbar_nav-item a:active
+{
+    color: tomato;
+}
+
+.searchbar
+{
+
+
+  width: 100px;
+    height: 100%;
+    position:absolute ;
+    margin-left: 50px;
+   
+    margin-top: 25px;
+   
+}
+.searchbar-tittle
+{
+    background-color:white, 0.1 ;
+   margin-left: 350px;
+   margin-top: 20px;
+   padding: 0px;
+}
+.iconbutton
+{
+    /* margin-right: 20px; */
+    margin-left: 540px;
+    align-content: center;
+    height: 50px;
+    width: 50px;
+  
+}
+
+    /* display: 'flex';
+    height: '100%';
+    position: 'absolute';
+    align-items: center;
+    justify-content:center;
+    */
+.expansionpanel
+{
+    margin-top: 100px;
+    width: 400px;
+    margin-left: 500px;
+}
+.barbidos
+{
+
+}

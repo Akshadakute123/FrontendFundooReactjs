@@ -4,29 +4,78 @@ display: flex;
 margin-top: 1px;
 }
 .form-row label{
-    padding-right:10px;
+    margin-left: 80px;
+    margin-top: 10px;
+
     text-align: center;
-    color:goldenrod;
+    color:black;
+    font-size: 18px;
+    font-style: italic;
     flex:1;
 }
-.form-row-input{
-    height: 30px;
-    padding-right:0px;
-    margin-left:0px;
+.showPassword
+{
+    margin-left: 185px;
+    margin-top: -50px;
 }
 .allign
 {
     border:2px solid brown;
     padding: 16px;
     color: gray;
-    margin-left: 450px;
+    margin-left: 350px;
     margin-right: 300px;
-    margin-top: 50px;
-    height: 400px;
+    margin-Top:"300px";
+      width: 50%;
     border-radius: 10px;
     border-spacing: 33px;
     background:white;
 }
+
+  label.E{
+    color:#DB4437;
+    font-size: 40px;
+  }
+  label.G{
+    color:rgb(206, 88, 241);
+    font-size: 40px;
+  }
+  label.I{
+    color:#4285F4;
+    font-size: 40px;
+  }
+  label.S{
+    color:#0F9D58;
+    font-size: 40px;
+  }
+  label.T{
+    color:#4285F4;
+    font-size: 40px;
+  }
+  label.R{
+    color:black;
+    font-size: 40px;
+  }
+  label.A{
+    color: darkblue;
+    font-size: 40px;
+  }
+  label.T{
+    color:rgb(20, 16, 2);
+    font-size: 40px;
+  }
+  label.I{
+    color:#4285F4;
+    font-size: 40px;
+  }
+  label.O{
+    color:#0F9D58;
+    font-size: 40px;
+  }
+  label.N{
+    color:rgb(14, 187, 187);
+    font-size: 40px;
+  }
 
 @media screen and(max-width:320px)
 {

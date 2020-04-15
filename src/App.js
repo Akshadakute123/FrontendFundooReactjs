@@ -16,8 +16,16 @@ import { CreateLabel } from './service/service';
 import Editlabel from './components/Editlabel';
 import SimplePopover from './components/Practice';
 import Trash from './components/Trash';
+import Dashboardss from './components/Dashboardss'
+import Resetpasswords from './components/Resetpasswords';
+import hello from './components/Dashboardss';
+import Hello from './components/Dashboardss';
+import Forgetpassword from './components/Forgetpassword';
+import SwipeableTemporaryDrawer from './components/Dashboards'
 // import { BrowserRouter as Router, Route, Switch ,Link} from 'react-router-dom'
-
+import Paginationpage from './components/Pginationpage'
+import Posts from './components/Posts';
+import Examples from './components/Animation';
 
 
 
@@ -26,14 +34,22 @@ function App() {
     <div className="App">
      {/* <Registers /> */}
     {/* <ClickAway /> */}
-     <Router />
+     {/* <Router /> */}
      {/* <Cards /> */}
+  {/* <Hello /> */}
      {/* <Dashboards /> */}
- {/* <Dashboard /> */}
+     {/* <Paginationpage /> */}
+     <Examples />
+     {/* <Posts /> */}
+     {/* <Forgetpassword/> */}
+     {/* <Dashboardss /> */}
+ <Dashboard />
+ {/* <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer> */}
  {/* <Editlabel/> */}
  {/* <Trash /> */}
  {/* <SimplePopover /> */}
      {/* <Note /> */}
+     {/* <Resetpasswords/> */}
  {/* <Icons /> */}
  {/* <Loginpage /> */}
  {/* <CreateNote /> */}

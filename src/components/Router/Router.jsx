@@ -12,6 +12,9 @@ import Forgetpassword from '../Forgetpassword';
 import Dashboard from '../Dashboard';
 import CreateNote from '../CreateNote';
 import Trash from '../Trash'
+import Maincomponent from '../Maincomponent';
+import Noteslist from '../NotesList';
+import Archieve from '../Archieve';
 export default function Router() {
     return (
 
@@ -24,10 +27,14 @@ export default function Router() {
                 {/* <Route path={'/loginsucess'} component={Loginsucess}/>  */}
                 {/* <Route path={'/'}exact component={ValiationForm}/> */}
                 
-                <Route path={'/resetpassword'} component={Resetpassword}/>
-                <Route path={'/forgetpassword'}component={Forgetpassword} />
-                <Route exact path={'/dashboard'} component={Dashboard} />
-                <Route  path={'/createnote'}component={CreateNote} />
+                <Route path={'/resetpassword'} exact component={Resetpassword}/>
+                <Route path={'/forgetpassword'} exact  component={Forgetpassword} />
+                <Route  path={'/dashboard'}  component={Maincomponent} />
+                <Route path={'/dashboard/trash'} exact component={Trash}/>
+                <Route path={'/dashboard/note'} exact component={Noteslist}/>
+                <Route path={'/dashboard/archieve'} exact component={Archieve}/>
+
+                {/* <Route  path={'/createnote'}component={CreateNote} /> */}
                 {/* <Route path='/' render={
                     ()=><Trash />
                  }  /> */}

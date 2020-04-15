@@ -1,107 +1,81 @@
-import { useState, useEffect, useRef } from 'react';
+
+import React, {useEffect } from 'react';
+import { CreateLabel } from '../service/service';
+import { TextField, Popover, Modal } from '@material-ui/core';
+import Dashboard from './Dashboard';
+import {getLabels}from '../service/service'
+import Popup from './popups'
+import List from '@material-ui/core/List';
+import LabelIcon from '@material-ui/icons/Label';
 
 
+import { Card } from '@material-ui/core'
 
-// Usage
+export default function Editlabel(props) {
 
-function App() {
+    const [labels, setlabels] = React.useState('')
 
-  // Create a ref that we add to the element for which we want to detect outside clicks
-
-  const ref = useRef();
-
-  // State for our modal
-
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  // Call hook passing in the ref and a function to call on outside click
-
-  useOnClickOutside(ref, () => setModalOpen(false));
-
-
-
-  return (
-
-    <div>
-
-      {isModalOpen ? (
-
-        <div ref={ref}>
-
-          👋 Hey, I'm a modal. Click anywhere outside of me to close.
-
-        </div>
-
-      ) : (
-
-        <button onClick={() => setModalOpen(true)}>Open Modal</button>
-
-      )}
-
-    </div>
-
-  );
-
-}
-
-
-
-// Hook
-
-function useOnClickOutside(ref, handler) {
-
-  useEffect(
-
-    () => {
-
-      const listener = event => {
-
-        // Do nothing if clicking ref's element or descendent elements
-
-        if (!ref.current || ref.current.contains(event.target)) {
-
-          return;
+    
+    
+    const Editlabels = () => {
+        console.log("Editlabel")
+        let label={
 
         }
+        label.labelname=labels
+        CreateLabel(label)
+
+            .then(Response => {
+                console.log(Response, "create succesfully")
+                alert((Response.data.message))
+            }).catch((error) => {
+                console.log(error.response.data)
+                //  console.log(error.Response.data.message ,"login failed")
+                // alert(error.response.data.details)
+                alert(error.response.data.message)
+            });
+        
+    }
+    return (
+        <div>
+           
+           <Modal
+             open={props.opens}
+             anchoeEl={props.datas}
+             onClose={props.functions}
+             >
+            <div>
+            <TextField placeholder="create label" name="labels" onChange={e=>setlabels(e.target.value)}>
+            </TextField>
+            <button onClick={Editlabels}>done</button>
+            </div>
+            </Modal>
 
 
 
-        handler(event);
-
-      };
 
 
+            <div>
+            {props.data && <Popup
+                content={<>
+                    <div>
+                        <TextField
+                            placeholder="please type inside me"  onChange={e=>setlabels(e.target.value)} /> 
+                        <button onClick={Editlabels}>done</button>
+                    </div>
+                </>}
+             handleClose={props.function }             
+             
+            />}
+          
+          
 
-      document.addEventListener('mousedown', listener);
+            </div>
+            </div>
+                       
+        
+    )
 
-      document.addEventListener('touchstart', listener);
+   
 
-
-
-      return () => {
-
-        document.removeEventListener('mousedown', listener);
-
-        document.removeEventListener('touchstart', listener);
-
-      };
-
-    },
-
-    // Add ref and handler to effect dependencies
-
-    // It's worth noting that because passed in handler is a new ...
-
-    // ... function on every render that will cause this effect ...
-
-    // ... callback/cleanup to run every render. It's not a big deal ...
-
-    // ... but to optimize you can wrap handler in useCallback before ...
-
-    // ... passing it into this hook.
-
-    [ref, handler]
-
-  );
-
-}export default App
+}

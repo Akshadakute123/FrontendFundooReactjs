@@ -6,32 +6,15 @@ import React, { Component } from 'react';
 	class MiniNote extends Component {
 	    constructor(props) {
 	        super(props);
-	        this.state = {
-	            open: false,
-	            tittle: "",
-	            description: "",
-	        };
+	       
 	    }
 	
-	    handleChangeText = (event) => {
-	        this.setState({
-	            [event.target.name]: event.target.value
-	        }, () => console.log(this.state, '------>name'))
-	    }
-	
-	    clickNote = () => {
-	        let note = {};
-	        note.title = this.state.title;
-	        note.description = this.state.description;
-	        console.log(note);
-	    }
-	
+	    
 	    render() {
 	        return (
-	            // <div >
-	            //     <div className="notePage"
-	            //onClick={() => this.props.history.push('/wholenote')}>
-	            <Card className="wholeMiniNoteCard">
+				 
+				
+				
 	               <TextField
                             id="standard-input"
                             label="Take a note"
@@ -42,8 +25,7 @@ import React, { Component } from 'react';
                             // onClick={openfile}
                         />
 
-	            </Card >
-	        );
+	            	        );
 	    }
 	}
 	

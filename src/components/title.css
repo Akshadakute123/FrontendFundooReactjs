@@ -1,21 +1,22 @@
 .title
 {
-    /* border:2px solid brown; */
+    
     padding: 16px;
-    /* color: gray; */
+    
     margin-left: 500px;
+  
     margin-right: 500px;
     margin-top: 30px;
-    height: 400px;
+    height: 350px;
     border-radius: 10px;
     border-spacing: 33px;
-    background:whitesmoke
-
+    
+    background-color:   rgb(226, 209, 226);
 
 }
 .border
 {
-    border-width: 33px;
+    
     color:black;
     background-origin: border-box;
    
@@ -34,29 +35,37 @@
     padding: 10px;
     margin-top: 1px;
 }
-#button
+.showPassword
 {
-    columns: width 0px;
-    /* column-rule-width: 30px; */
-    /* align-content: center; */
-    margin-left: 10px;
- /* margin-top: 40px; */
-    margin-right: 0px;
-    flex: 1;
-    display :flex;
-
+    margin-left: 185px;
+    margin-top: -50px;
 }
-#button1
-{
-    columns: width 20px;
-    column-rule-width: 30px;
-    padding-right: 20px;
-    /* scroll-padding-left: 70px ; */
-    align-content: center;
-    margin-left: 70px;
-    margin-top: 40px;
-    margin-right: 0px;
-    flex:2;
+
+.ul{
+    list-style: none;
     display: flex;
-
-}
+    margin-left: -26px;
+  }
+  ul li{
+    font-size: 50px;
+    margin-left: 25px;
+    text-shadow: 5px 10px 10px #333;
+  }
+  ul li:nth-child(1){
+    color: red;
+  }
+  ul li:nth-child(2){
+    color: rgb(73, 20, 220);
+  }
+  ul li:nth-child(3){
+    color:orange;
+  }
+  ul li:nth-child(4){
+    color: yellow
+  }
+  ul li:nth-child(5){
+    color:green
+  }
+ ul li:nth-child(6){
+    color:purple
+  }

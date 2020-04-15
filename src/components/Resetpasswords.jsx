@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './registercss.css'
+import './resetpassword.css'
 import Button from '@material-ui/core/Button';
 import {resetpassword}from '../service/service'
+import { TextField } from '@material-ui/core';
 class Resetpasswords extends Component {
     constructor(props)
     {
@@ -73,24 +74,29 @@ class Resetpasswords extends Component {
         return (
             <div className="allign">
                 <form>
-                    <h2>Reset Password</h2>
+                    <h2 className="login">Reset Password</h2>
                     <div className="form-row">
-                        <label>Email-Id</label>
-                        <input type="email" name="email" value={this.email} onChange={this.handlechange} placeholder="email" />
+                        <label style={{font:"bold"}}>Email-Id</label>
+                        <TextField 
+                        
+             type="email" name="email"
+              value={this.email} 
+              onChange={this.handlechange}
+               placeholder="email" ></TextField>
                     </div>
                     <div className="form-row">
                         <label>New password</label>
-                        <input type="password" name="password" value={this.password}     onChange={this.handlechange} placeholder="password" />
+                        <TextField
+                         type="password" name="password" value={this.password}     onChange={this.handlechange} placeholder="password" />
                     </div>
                     <div className="form-row">
                         <label>confirm password</label>
-                        <input type="password" name="confirm_password" value={this.confirm_password}   onChange={this.handlechange}  placeholder="confirm password" />
+                        <TextField type="password" name="confirm_password" value={this.confirm_password}   onChange={this.handlechange}  placeholder="confirm password" />
                     </div>
                     <div> 
-                         <Button varient="contained" color="secondary"
-                                        onClick={this.resetpasswordform}
-                                           
-                                    >Submit</Button>
+                    <Button style={{marginTop:"20px"}} variant="contained"  color="secondary" 
+                 onClick={this.resetpasswordform}>Submit</Button>
+                        
 
                     </div>
 

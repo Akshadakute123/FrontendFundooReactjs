@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {forgetpassword} from '../service/service'
+import './resetpassword.css'
 import { InputBase, TextField, Button } from '@material-ui/core';
 class Forgetpassword extends Component {
     constructor(props)
@@ -51,10 +52,17 @@ class Forgetpassword extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{width:'24%'}} className="allign">
+                <div className="login">
+                    <h2>Forget Password</h2>
+                </div>
+                <div className="form-row">
                 <label>EmailId</label><br></br>
-                <input type="" placeholder="email"  name="email" value={this.email} onChange={this.handlechange} />
-                <Button  color="secondary" onClick={this.forgetpasswordform} >submit</Button>
+                <TextField type="email" placeholder="email"  name="email" value={this.email} onChange={this.handlechange} />
+               </div>
+               <div>
+                <Button style={{marginTop:"20px"}} variant="contained"  color="secondary"  onClick={this.forgetpasswordform} >submit</Button>
+                </div>
             </div>
         );
     }

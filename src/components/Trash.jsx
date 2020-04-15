@@ -15,19 +15,19 @@ export default function Trash(props) {
 
     }, [])
     const Listoftrash = () => {
-        trashfile()
-            .then(Response => {
-                setstate(Response.data)
+        // trashfile()
+        //     .then(Response => {
+        //         setstate(Response.data)
 
-                console.log(Response.data, "list")
-                console.log(Response.data)
-                // alert((Response.data.message))
-            }).catch((error) => {
-                console.log(error.response.data)
-                //  console.log(error.Response.data.message ,"login failed")
-                // alert(error.response.data.details)
-                alert(error.response.data.message)
-            });
+        //         console.log(Response.data, "list")
+        //         console.log(Response.data)
+        //         // alert((Response.data.message))
+        //     }).catch((error) => {
+        //         console.log(error.response.data)
+        //         //  console.log(error.Response.data.message ,"login failed")
+        //         // alert(error.response.data.details)
+        //         alert(error.response.data.message)
+        //     });
     }
 
     return (

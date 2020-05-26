@@ -14,7 +14,7 @@ import ClickAway from './components/MiniNote';
 import Note from './components/Note';
 import { CreateLabel } from './service/service';
 import Editlabel from './components/Editlabel';
-import SimplePopover from './components/Practice';
+
 import Trash from './components/Trash';
 import Dashboardss from './components/Dashboardss'
 import Resetpasswords from './components/Resetpasswords';
@@ -26,6 +26,20 @@ import SwipeableTemporaryDrawer from './components/Dashboards'
 import Paginationpage from './components/Pginationpage'
 import Posts from './components/Posts';
 import Examples from './components/Animation';
+import Register from './components/Registration';
+import SimplePopover from './components/Reminder';
+import Profilepic from './components/Profilepic';
+import ArchieveList from './components/ArchieveList';
+// import SimplePopover from './components/Practice';
+
+import Reminder from './components/Reminder' 
+import ListOfReminder from './components/Reminderlist';
+import Practice from './components/Profilepic';
+import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
+import GetAllLabels from './components/GetAllLabels';
+import Bagroundcolorchange from './components/Bagroundcolor';
+import Noteslistpagination from './components/Bffd';
+import Dashboardtriel from './components/Dashboardss';
 
 
 
@@ -33,21 +47,33 @@ function App() {
   return (
     <div className="App">
      {/* <Registers /> */}
+     {/* <Register /> */}
+     {/* <Practice /> */}
     {/* <ClickAway /> */}
-     {/* <Router /> */}
+     <Router />
+{/* <Dashboardtriel /> */}
+     {/* <Bagroundcolorchange /> */}
+     {/* <Bagroundcolorchange /> */}
+     {/* <Editlabel /> */}
+     {/* <GetAllLabels/> */}
+     {/* <ListOfReminder /> */}
+     {/* <Noteslistpagination /> */}
      {/* <Cards /> */}
   {/* <Hello /> */}
      {/* <Dashboards /> */}
      {/* <Paginationpage /> */}
-     <Examples />
+     {/* <Examples /> */}
+     {/* <ArchieveList /> */}
      {/* <Posts /> */}
      {/* <Forgetpassword/> */}
      {/* <Dashboardss /> */}
- <Dashboard />
+ {/* <Dashboard /> */}
  {/* <SwipeableTemporaryDrawer></SwipeableTemporaryDrawer> */}
  {/* <Editlabel/> */}
  {/* <Trash /> */}
  {/* <SimplePopover /> */}
+ {/* <Profilepic /> */}
+ {/* <Reminder /> */}
      {/* <Note /> */}
      {/* <Resetpasswords/> */}
  {/* <Icons /> */}
@@ -55,6 +81,7 @@ function App() {
  {/* <CreateNote /> */}
  {/* <Noteslist /> */}
  {/* <Editlabel /> */}
+ 
     </div>
   );
 }

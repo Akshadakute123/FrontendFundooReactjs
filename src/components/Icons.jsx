@@ -27,11 +27,20 @@ import Trashnote from './Trashnote';
 import Archieve from './Archieve';
 import GetAllLabels from './GetAllLabels';
 import Editlabel from './Editlabel';
+import Reminder from './Reminder';
+import AddLabelToNote from './AddLabelToNote';
+import AddCollaborator from './collaboratorpeople'
+import Bagroundcolorchange from './Bagroundcolor';
+
 export default function Icons(props)
-{
+{ 
+  console.log("props.functions from create",props.functions)
+  console.log(props.data,"lable namee")
+  const [date, setDate] = React.useState(new Date);
     const[close,setclose]=React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorE, setAnchorE] = React.useState(null);
+    const [anchorE2, setAnchorE2] = React.useState(null);
     const[popper,setpopper]=React.useState(false);
 
   const handleopen=event=>
@@ -56,6 +65,14 @@ export default function Icons(props)
     const handleClose1 = () => {
       setAnchorE(null);
     };
+    const handleClick3 = event => {
+      setAnchorE2(event.currentTarget);
+  };
+
+  const handleClose3 = () => {
+      setAnchorE2(null);
+  };
+
   
     // const closestate=()=>
     // {
@@ -67,14 +84,35 @@ const open=Boolean(popper)
     return(
     <List>
     
+    <ListItemIcon>
+      <Reminder data={props.data} function={handleClick3} /></ListItemIcon>
+            <Menu
+                anchorEl={anchorE2}
+                keepMounted
+                open={Boolean(anchorE2)}
+                onClose={handleClose3}
+            >
+                <div style={{ width: "500px", position: "relative" }}>
+                    <MenuItem><Reminder style={{ width: "500px", position: "relative" }} value={date} onChange={() => setDate(date)} />
+                        <Button size="small" >Set</Button>
+                    </MenuItem></div>
 
-    <ListItemIcon><NotificationsIcon /></ListItemIcon>
-    <ListItemIcon>{<PersonAddIcon />}</ListItemIcon>
+            </Menu>
+
+    
+    <ListItemIcon>
+      <AddCollaborator data={props.data}/>
+      {/* {<PersonAddIcon />} */}
+      </ListItemIcon>
+      <ListItemIcon>
+        <Bagroundcolorchange noteId={props.data} />
+      </ListItemIcon>
     <ListItemIcon>
 
-    <Archieve noteId={props.data}/>
+    <Archieve noteId={props.data} newdata={props.functions}/>
 </ListItemIcon>
-    <ListItemIcon><MoreVertIcon onClick={handleClick}/>
+    <ListItemIcon>
+      <MoreVertIcon onClick={handleClick}/>
     
     
     </ListItemIcon>
@@ -85,7 +123,7 @@ const open=Boolean(popper)
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem  onClick={handleClick1}>Add Label</MenuItem>
+        {/* <MenuItem  onClick={handleClick1}>Add Label</MenuItem> */}
         {/* <MenuItem >
         <Editlabel/>
         </MenuItem> */}
@@ -98,12 +136,12 @@ const open=Boolean(popper)
           >
             
 
-          <Editlabel  datas={popper} functions={handleclose2} opens={open} ></Editlabel>
-         <GetAllLabels />
+          {/* <Editlabel  datas={popper} functions={handleclose2} opens={open} ></Editlabel>
+         <GetAllLabels /> */}
          </Menu>
-
         {/* <MenuItem >delete note</MenuItem> */}
-        <Trashnote noteId={props.data}/>
+        <AddLabelToNote noteId={props.data}/>
+        <Trashnote noteId={props.data} datafromnotes={props.functions}/>
       </Menu>
        
 

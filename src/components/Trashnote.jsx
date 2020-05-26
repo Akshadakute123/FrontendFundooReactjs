@@ -3,7 +3,8 @@ import { trash } from '../service/service';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Menu } from '@material-ui/core';
 export default function Trashnote(props)
-{
+{ 
+    console.log(props.datafromnotes,"information from icons")
     const[state,setState]=React.useState()
      const deleteNote=(id)=>
      { 
@@ -16,20 +17,21 @@ export default function Trashnote(props)
      
             .then(Response => {
                 console.log(Response, "note trash succesfully")
-                // alert((Response.data.message))
+
+                alert((Response.data.message))
+                 props.datafromnotes();
             }).catch((error) => {
                 console.log(error.response.data)
-                //  console.log(error.Response.data.message ,"login failed")
-                // alert(error.response.data.details)
+             
                 alert(error.response.data.message)
             });
-            // return (<Note onClickbutton={ notecreate}/>)
+           
     }
 
 
      return(
          
-        <MenuItem onClick={()=> (props.noteId)}>Delete note</MenuItem>
+        <MenuItem onClick={()=> deleteNote(props.noteId)}>Delete note</MenuItem>
 
         
      )

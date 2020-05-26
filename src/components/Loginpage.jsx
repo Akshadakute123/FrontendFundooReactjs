@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
-import './title.css'
-import './registercss.css'
+// import './title.css'
+import './CssStyles.css'
+// import './registercss.css'
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
@@ -20,6 +21,8 @@ const initialState = {
    token:"",
    show:false
   };
+
+  
 
   
     
@@ -81,7 +84,7 @@ const initialState = {
       
         <div className="border">
         <div className=" title">
-          <div>
+          <div style={{marginLeft:'200px'}}>
           <Avatar >
           <LockOutlinedIcon />
           </Avatar>
@@ -89,8 +92,8 @@ const initialState = {
                           
          <form onSubmit={this.handleSubmit}>
              {/* <h2 className="login">Login page</h2> */}
-             <ul class="ul">
-<li>L</li>
+             <ul class="ul" style={{marginleft:'500px'}}>
+<li >L</li>
 <li>o</li>
 <li>g</li>
 <li>i</li>

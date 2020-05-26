@@ -44,7 +44,7 @@ background-color: transparent;
 }
 
 .refresh{
-    @include color-field;
+    
     margin-left: 45px;
 }
 
@@ -151,5 +151,63 @@ transition: opacity 250ms ease-out;
     flex-wrap: wrap;
     
 }
+.over:hover{
+    background-color: bisque;
+    border-radius: 0 25px 25px 0;   
+}
 
+
+.over:focus{
+    background-color: bisque;
+    border-radius: 0 25px 25px 0; 
+     
+}
+.over{
+  font-size: 17px;
+    font-weight: 80px;
+    letter-spacing: .01785714em;
+    font-style: italic;
+    width: 250px;
+   padding-top: 50px;
+   margin-top: 90px;
+    
+}
+
+
+@media only screen and (max-width:400px){
+    .appbar{
+        width:100%;
+        height: 900%;
+    }
+  }
+  @media only screen and (max-width:400px){
+    .main{
+        width:100%;
+    }
+  }
+  @media only screen and (max-width:400px){
+    .searchIcon{
+        width:100%;
+    }
+    #searchButton{
+      width: 100%;
+    }
+    .searchDisplay{
+        width: 100%;
+      }
+      .searchDiv{
+        width: 100%;
+      }
+  }
+  @media (max-width:400px){
+    .profile{
+        width:100%;
+    }
+    .setting{
+      width: 100%;
+    }
+    .refresh{
+        width: 100%;
+    }
+  }
 

@@ -3,24 +3,38 @@ import React, { useState, useEffect } from 'react';
 import Posts from './Posts'
 import Pagination from './Pagination'
 import axios from 'axios';
+import { findnotes, createNote } from '../service/service'
+
+import Noteslistpagination from './Bffd';
+import CreateNote from './CreateNote';
 // import './App.css';
 
 const Paginationpage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(5);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const res = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      setPosts(res.data);
-      setLoading(false);
-    };
+    findallnotes()
+    
+}, [])
 
-    fetchPosts();
-  }, []);
+  const findallnotes = () => {
+    findnotes()
+        .then(Response => {
+            setPosts(Response.data)
+
+            console.log(Response.data, "list")
+            console.log(Response.data)
+            // alert((Response.data.message))
+        }).catch((error) => {
+            console.log(error.response.data)
+           
+            alert(error.response.data.message)
+        });
+}
+
 console.log(posts)
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -32,9 +46,9 @@ console.log(posts)
 
   return (
     <div className='container mt-5'>
-      <h1 className='text-primary mb-3'>My Blog</h1>
-      
-      <Posts posts={currentPosts} loading={loading} />
+      <CreateNote function={findallnotes}/>
+
+      <Noteslistpagination posts={currentPosts} function={findallnotes}/>
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={posts.length}

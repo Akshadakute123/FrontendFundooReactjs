@@ -18,6 +18,7 @@ export default function Archieve(props)
            .then(Response => {
                console.log(Response, "note archieve succesfully")
                 alert((Response.data.message))
+                props.newdata();
            }).catch((error) => {
                console.log(error.response.data)
                //  console.log(error.Response.data.message ,"login failed")

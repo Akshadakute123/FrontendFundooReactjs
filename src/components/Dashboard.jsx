@@ -1,7 +1,8 @@
 /* eslint-disable*/
 import React, { Component, useEffect } from 'react';
-import './Toolbar.css'
 import IconButton from '@material-ui/core/IconButton';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
@@ -34,40 +35,110 @@ import Trash from './Trash';
 import { trash, trashfile, findnotes } from '../service/service';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar';
+import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 
 import Toolbar from '@material-ui/core/Toolbar';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-
-
+import {getLabels} from '../service/service'
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import { createMuiTheme, Tooltip, Avatar } from "@material-ui/core";
 import './Dashboards.css';
-
+import { CreateLabel } from '../service/service';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import DoneIcon from '@material-ui/icons/Done';
+import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 
 import { InputAdornment } from '@material-ui/core';
-
-
+import Practice from './Profilepic';
+import {displayNoteListBySearchKey} from '../service/service'
+const WAIT_INTERVAL = 1000;
 function Dashboard(props) {
     console.log("-------------------------->",props)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
-
+    const [labelget,setlabelget] = React.useState([]);
+    
     const [allNotes, setAllNotes] = React.useState([]);
 
     const [isOpen, setOpenPoup] = React.useState(false);
     const [value, setvalue] = React.useState(false)
     const [opens, setopens] = React.useState(false);
+    const [list, setlist] = React.useState([])
+
     const [refresh, setrefresh] = React.useState(false)
+    const openn = Boolean(anchorEl);
+     const[openlabel,setopenlabel]=React.useState(false);
+    const[handleClose,sethandleclose]=React.useState(false);
+    const [label, setlabel] = React.useState({labelname:''})
+   const[timer,settimmer]=React.useState(null)
+    const[search,setsearch]=React.useState('')
+    const[notedisply,setnotedisplay]=React.useState([])
+   const handlChangeSearch = (event) => {
+        
+          setsearch({
+      ...search  , [event.target.name]: event.target.value
+        })
+          console.log(search, '---->name')
+        
+      }
+    
+    const  displaySerachNotes = () => {
+      displayNoteListBySearchKey(search).then(Response => {
+          setnotedisplay( Response.data)
+        
+        })
+          .catch((error) => {
+            alert(error.response.data)
+          })
+      }
+   
+   const openDilogbox = () => {
+        setopenlabel(true)
 
-
-
+   }
+  const handleCloseforlabel = () => {
+       setopenlabel( false );
+   };
+    const handleMenuforprofile = event => {
+        setAnchorEl(event.currentTarget);
+      };
+      const handleMenuCloseprofile = () => {
+        setAnchorEl(null);
+        sessionStorage.clear();
+        props.data.history.push("/")
+      };
+     
 
     const handleReload = () => {
         setrefresh(true)
 
-    }
 
+    }
+    const onFormSubmit = (e) => {
+        e.preventDefault()
+        fileUpload(file).then((response) => {
+          console.log(response.data);
+        })
+      }
+    
+      const fileUpload = (file) => {
+        const url = 'http://localhost:8080/home/uplaodImage';
+        const formData = new FormData();
+        formData.append('file', file)
+        const config = {
+          headers: {
+            contentType: 'application/json',
+            'token': sessionStorage.getItem('token'),
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'PUT,POST,DELETE'
+          }
+        }
+        return post(url, formData.name, config)
+      }
+
+console.log("value of setrefresh",refresh)
    
   const handleTrash = () => {
     props.data.history.push('/dashboard/trash')
@@ -77,20 +148,12 @@ function Dashboard(props) {
     props.data.history.push('/dashboard/note')
   }
   const handleArchive=()=>{
-    props.data.history.push('/dashboard/archive')
+    props.data.history.push('/dashboard/archieve')
   }
-
-
-
-    // handleSignOut=()=>
-    // {
-    //     sessionStorage.removeItem('token');
-    //     sessionStorage.removeItem('img');
-    //     this.props.props.history.push('/');
-    // }
-
-    
-
+  const handlereminder=()=>
+  {
+      props.data.history.push('/dashboard/reminder')
+  }
     const handleMenu = event => {
 
 
@@ -111,9 +174,7 @@ function Dashboard(props) {
         setOpenPoup(true);
         console.log(open, "open")
     }
-    const handleClose = () => {
-        setOpenPoup(false);
-    }
+   
     console.log(isOpen, "popup funxtion state")
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -125,66 +186,10 @@ function Dashboard(props) {
     const handleProfileMenuOpen = event => {
         setAnchorEl(event.currentTarget);
     };
-
-    const Listoftrash = () => {
-        trashfile()
-            .then(Response => {
-                setAllNotes(Response.data)
-                console.log(Response.data, "list", allNotes);
-
-                // alert((Response.data.message))
-            }).catch((error) => {
-                console.log(error.response.data)
-                //  console.log(error.Response.data.message ,"login failed")
-                // alert(error.response.data.details)
-                alert(error.response.data.message)
-            });
-    }
-
-
-
-    // function onhandlechange(event) {
-    //     console.log("helllololo", event.target.name, event.target.value);
-    //     // let fields = notein;
-    //     // fields[event.target.name] = event.target.value;
-    //     setlabels({
-    //         ...labels, [event.target.name]: event.target.value
-    //     }
-    //     )
-    //     console.log('fields', labels);
-
-    // }
-
-    useEffect(() => {
-        // findallnotes()
-        console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
-    }, [])
-
-    const findallnotes = () => {
-        // findnotes()
-        //     .then(Response => {
-        //         setAllNotes(Response.data)
-
-        //         console.log(Response.data, "list")
-        //         console.log(Response.data)
-        //         // alert((Response.data.message))
-        //     }).catch((error) => {
-        //         console.log(error.response.data)
-        //         //  console.log(error.Response.data.message ,"login failed")
-        //         // alert(error.response.data.details)
-        //         alert(error.response.data.message)
-        //     });
-    }
-
-
-
-    return (
-
-        
-
-            
-        <div >
-            <AppBar position='fixed' color='inherit'>
+        return (
+             <div >
+               <div className="appbar">
+            <AppBar  position='fixed' color='inherit'>
                 <Toolbar>
                     <IconButton
                         edge='start'
@@ -217,11 +222,15 @@ function Dashboard(props) {
 
                             placeholder='Search'
                             inputProps={{ 'aria-label': 'search' }}
+                            onChange={handlChangeSearch}
+                            
+                            
 
 
                         />
+                        <button onClick={displaySerachNotes}>done</button>
                     </div>
-                    <div className={refresh ? 'loader' : 'refresh'} onClick={handleReload}>
+                    <div className='refresh'>
                         <Tooltip title='Refresh'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 18 18">
                                 <path d="M9 13.5c-2.49 0-4.5-2.01-4.5-4.5S6.51 4.5 9 4.5c1.24 0 2.36.52 3.17 1.33L10 8h5V3l-1.76 1.76C12.15 3.68 10.66 3 9 3 5.69 3 3.01 5.69 3.01 9S5.69 15 9 15c2.97 0 5.43-2.16 5.9-5h-1.52c-.46 2-2.24 3.5-4.38 3.5z" />
@@ -245,63 +254,65 @@ function Dashboard(props) {
                             </svg>
                         </Tooltip>
                     </div>
-                    <div className='profile'>
-                        <IconButton
-                            edge="end"
-                            aria-label="account of current user"
-                            className='iconButton'
-                            aria-haspopup="true"
-                            color="inherit"
-                            onClick={(event) => { handleMenu(event) }}
-                        >
-                            <Avatar />
-                        </IconButton>
-                        <Menu
-                            
+                    <div className="profile">
+              <IconButton
+                onClick={handleMenuforprofile}
+                color="inherit">
+                <Avatar className="account" alt={name}
+                  src={localStorage.getItem("profilepicture")}><AddAPhotoOutlinedIcon style={{ padding: "10px", marginLeft: "20px", marginTop: "10px" }} />
+                </Avatar>
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={openn}
+                onClose={handleMenuCloseprofile}
+              ><Practice />
+                <MenuItem onClick={handleMenuCloseprofile}>Logout</MenuItem>
+              </Menu>
+            </div>
 
 
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'middle',
-                                horizontal: 'bottom',
-                            }}
-                            open={opens}
-
-                        >
-                            <MenuItem >Sign Out</MenuItem>
-                        </Menu>
-                    </div>
                 </Toolbar>
             </AppBar>
-           <div >
-                           <Drawer  
-                variant="persistent"
-                anchor="left"
-                // className={classes.drawer}
-                open={open}
-
-            >
-                <div>
+            </div>
+           <div style={{marginTop:"-100px"}} >
+           <Drawer
+           
+          className="over1"
+          anchor="left"
+          open={open}
+        >
+                <div >
                     <IconButton onClick={handleDrawerClose}>
                       
                     </IconButton>
                     {/* </div> */}
                 </div>
                 <Divider />
-                <List>
+                <List >
                     {['Reminder'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon> <NotificationsIcon />}</ListItemIcon>
+                        <ListItem button key={text}
+                        onClick={() => {
+                            index % 2 === 0 ?
+                              handlereminder()
+                              :
+                              null
+                          }
+                          }>
+                            <ListItemIcon>
+                
+            <NotificationsIcon /></ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
                 </List>
                 
-          <List style={{backgroundColor:'#feefc3'}}>
+          <List className="over" >
             {["Notes"].map((text, index) => (
               <ListItem button key={text} onClick={() => {
                 index % 2 === 0 ?
@@ -320,57 +331,47 @@ function Dashboard(props) {
 
 
                 <Divider /> 
-                <List>
+                <List className="over">
                     {['Labels'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
-               <GetAllLabels />
+                       <GetAllLabels />
 
                 </List>
-                {/* <div style={{ marginRight: '100px' }}>
-                    <label>Labe  ls</label>
-
-                </div >
-                 */}
-
-                
-                <List>
+                    <List className="over">
                     {['Editlabels'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon> <EditIcon onClick={togglePopup} />
+                        <div>
+                        <MenuItem onClick={() => {openDilogbox()}}>
+                         <ListItemIcon><EditOutlinedIcon />
+                         <Editlabel />
+                         </ListItemIcon>
+                         <ListItemText onClick={() =>  {openDilogbox()} }>Create Label</ListItemText>
+                         </MenuItem>
 
-
-                            </ListItemIcon>
-
-                            <ListItemText primary={text} />
-                        </ListItem>
+                          </div>
                     ))}
                 </List>
-                {/* <div>
-                    {isOpen && <Popup
-                        content={<>
-                            <div>
-                                <TextField
-                                    placeholder="please type inside me" onChange={onhandlechange} />
-                                <button onClick={props.onClickbutton}>done</button>
-                            </div>
-                        </>}
-                        handleClose={togglePopup}
-                    />}
-                </div> */}
+                
                 <Divider />
 
-                <List>
+                <List className="over">
                     {['Archieve'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text} onClick={() =>
+                        {
+                            index % 2 ==0 ?
+                            handleArchive()
+                            :
+                            null
+                        }
+                        }>
                             <ListItemIcon> <InboxIcon /></ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
                 </List>
-                <List>
+                <List className="over">
             {["Trash"].map((text, index) => (
               <ListItem button key={text} onClick={() => {
                 index % 2 === 0 ?
@@ -389,28 +390,10 @@ function Dashboard(props) {
 
             </Drawer>
             </div>
+            {/* <Trash data={value} function={handleclosevalue} /> */}
+             <Editlabel  function={handleCloseforlabel} open={openlabel}/>
 
-            <Container>
-                {/* <ClickAwayListener onClickAway={onclickaway}> */}
-                <div>
-
-
-
-                    <CreateNote />
-
-
-
-
-                </div>
-                {/* </ClickAwayListener> */}
-
-            </Container>
-
-            <Editlabel data={isOpen} function={handleClose}
-            />
-            <Trash data={value} function={handleclosevalue} />
-
-            <Noteslist data={allNotes} />
+            {/* <Noteslist /> */}
 
         </div>
     )

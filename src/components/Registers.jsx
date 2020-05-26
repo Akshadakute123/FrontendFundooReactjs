@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Button from '@material-ui/core/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
-import './registercss.css'
+import './CssStyles.css';
+import {newregistration} from '../service/service'
 import TextField from '@material-ui/core/TextField';
 //  const  classes =null;
 const useStyles = makeStyles({
@@ -34,6 +35,22 @@ const[register,setregister]=React.useState({username: '' ,email: ' ',password: '
         )
         console.log('fields', register);
 
+    }
+    const registration = () => {
+        console.log("hiiiiiii")
+    
+        newregistration(register)
+
+            .then(Response => {
+                console.log(Response, " succesfully")
+                 alert((Response.data.message))
+            }).catch((error) => {
+                console.log(error.response.data)
+                //  console.log(error.Response.data.message ,"login failed")
+                // alert(error.response.data.details)
+                alert(error.response.data.message)
+            });
+            // return (<Note onClickbutton={ notecreate}/>)
     }
     const classes = useStyles();
 
@@ -79,7 +96,7 @@ const[register,setregister]=React.useState({username: '' ,email: ' ',password: '
                         
                     </div>
                     <div>
-                    <Button style={{marginTop:'20px'}} variant="contained" color="primary" >
+                    <Button style={{marginTop:'20px'}} variant="contained" color="primary" onClick={registration} >
         Signup
       </Button>
 

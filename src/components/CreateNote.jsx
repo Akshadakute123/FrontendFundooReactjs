@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React,{useEffect} from 'react'
+import {ListItemIcon, Tooltip} from '@material-ui/core'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import './CSS/Dashboard.css'
@@ -8,13 +8,18 @@ import { Container, ClickAwayListener, Card, Icon, InputBase } from '@material-u
 import Icons from './Icons';
 import MiniNote from './MiniNote';
 import Note from './Note';
-
+import Noteslist from './NotesList';
 export default function CreateNote(props) {
-
+ console.log(props.function,"from noteslist")
     const [state, setstate] = React.useState(false);
     const [note, setnote] = React.useState("");
     const [notein, setnotein] = React.useState({ tittle: '', description: '' })
     const [clickaway, setclickaway] = React.useState(false);
+
+    // useEffect(() => {
+    //    // findallnotes()
+    //     console.log(props,"---------------------------->")
+    // }, [])
     const openfile = () => {
         setstate(true);
         console.log(state)
@@ -39,13 +44,18 @@ export default function CreateNote(props) {
         console.log('fields', notein);
 
     }
+    
+      
     const notecreate = () => {
     
         createNote(notein)
 
             .then(Response => {
                 console.log(Response, "create succesfully")
-                // alert((Response.data.message))
+                 alert((Response.data.message))
+                //  callbackdata();
+                props.function();
+                 
             }).catch((error) => {
                 console.log(error.response.data)
                 //  console.log(error.Response.data.message ,"login failed")
@@ -62,7 +72,7 @@ export default function CreateNote(props) {
         <Container >
               
             <div className="expansionpanel"  >
-            <Card>
+            <Card >
                 {/* <ClickAwayListener onClickAway={onclickaway}> */}
 
                     {state ?
@@ -75,6 +85,13 @@ export default function CreateNote(props) {
                                 // value={notein.description}
                                 onChange={onhandlechange}
                                 type="text" />
+                                 <ListItemIcon style={{ marginLeft: "300px" }}>  <Tooltip title="Pin note">                          
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                 <path fill="none" d="M0 0h24v24H0z" />
+                                 <path fill="#000" d="M17 4v7l2 3v2h-6v5l-1 1-1-1v-5H5v-2l2-3V4c0-1.1.9-2 2-2h6c1.11 0 2 .89 2 2zM9 4v7.75L7.5 14h9L15 11.75V4H9z" />
+                                 </svg>
+                                 </Tooltip>
+                               </ListItemIcon>
                         </div> : null}
 
 
@@ -100,24 +117,14 @@ export default function CreateNote(props) {
 
                                
                             {/* <Icons /> */}
-                            <Icons function={closenote}/>
+                            <Icons function={closenote} />
                             <Button size="small" color="primary" onClick={notecreate}>create</Button>
 
   
 
                         </div> : null}
 
-                    {/* < div>
-                        {clickaway ?
-                            <div>
-                                <h4 >Hello</h4>
-                            </div> : null}
-                        {clickaway ?
-                            <div>
-                                <h1>HIII</h1>
-                            </ div> : null}
-                    </ div> */}
-                {/* </ClickAwayListener> */}
+                    
                 </Card>
             </div>
         </Container>

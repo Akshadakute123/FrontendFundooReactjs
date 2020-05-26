@@ -10,16 +10,15 @@ import LabelIcon from '@material-ui/icons/Label';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Editlabel from './Editlabel';
+import Icons from './Icons';
 
-export default function GetAllLabels() {
-
+export default function GetAllLabels(props) {
+console.log(props.function,"kssssssssssssssssssssssddffd")
 
     const [list, setlist] = React.useState([])
 
-
-  
-
-    useEffect(() => {
+       useEffect(() => {
         findallLabels()
         
         console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
@@ -27,45 +26,43 @@ export default function GetAllLabels() {
     }, [])
     const findallLabels = () => {
         console.log('insider get labels')
-        // getLabels()
-        //     .then(Response => {
-        //         setlist(Response.data)
+        getLabels()
+        
+            .then(Response => {
+                setlist(Response.data)
 
-        //         console.log(Response.data, "list")
-        //         console.log(Response.data)
-        //         // alert((Response.data.message))
-        //     }).catch((error) => {
-        //         console.log(error.response.data)
-        //         //  console.log(error.Response.data.message ,"login failed")
-        //         // alert(error.response.data.details)
-        //         alert(error.response.data.message)
-        //     });
-
+                console.log(Response.data, "list")
+                console.log(Response.data)
+                // alert((Response.data.message))
+            }).catch((error) => {
+                console.log(error.response.data)
+                //  console.log(error.Response.data.message ,"login failed")
+                // alert(error.response.data.details)
+                alert(error.response.data.message)
+            });
+    
     }
     return (
         <div>
-            
-
-                {list.map(o => {
-                    return <div >
-
-                        
+              {list.map(o => {
+                    return <div>
                             <List>
                            
                             <ListItemIcon> 
-                                <Checkbox/>
+                                <LabelIcon>
+                           
+                            </LabelIcon>
                             {o.labelname}
                             </ListItemIcon>
-                        
-                          
-                            </List>
-                          
+                              </List>
+                            
                         </div>
-
+                        
             
 
                 })}
-            
+                
+          {/* <Editlabel data={findallLabels()}/>   */}
         
 
         </div>   
